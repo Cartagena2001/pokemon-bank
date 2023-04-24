@@ -19,12 +19,6 @@ export default function DashLayout({ children }) {
     <>
     {/* lg:h-screen */}
       <div className="flex-row lg:flex p-10 lg:p-20 lg:gap-10">
-        <Image
-          className="w-100 z-[-1] fill"
-          src="/resources/bg.png"
-          alt="Pokémon Bank Logo"
-          fill
-        />
         <div>
             <Sidebar />
         </div>
