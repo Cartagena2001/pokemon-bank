@@ -3,44 +3,67 @@ import React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-import IconHouse from "../../../public/resources/icons/noun-home-5673931.svg";
-
-const links = [
-  {
-    name: "Inicio",
-    href: "/dashboard/home",
-    icon: "home",
-    current: true,
-  },
-  {
-    name: "Depositar",
-    href: "/dashboard/deposit",
-    icon: "home",
-    current: false,
-  },
-  {
-    name: "Retirar",
-    href: "/dashboard/withdraw",
-    icon: "home",
-    current: false,
-  },
-  {
-    name: "Pagar Servicios",
-    href: "/dashboard/payService",
-    icon: "home",
-    current: false,
-  },
-  {
-    name: "Historial",
-    href: "/dashboard/history",
-    icon: "home",
-    current: false,
-  },
-];
+import house from "../../../public/resources/icons/noun-house-5026194.svg";
+import deposit from "../../../public/resources/icons/noun-receive-money-5673855.svg";
+import withdraw from "../../../public/resources/icons/noun-send-money-5673861.svg";
+import payService from "../../../public/resources/icons/noun-bank-2307169.svg";
+import history from "../../../public/resources/icons/noun-bill-notification-3820887.svg";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
+
+  const [links, setLinks] = useState([
+    {
+      name: "Inicio",
+      href: "/dashboard/home",
+      icon: house,
+      current: false,
+    },
+    {
+      name: "Depositar",
+      href: "/dashboard/deposit",
+      icon: deposit,
+      current: false,
+    },
+    {
+      name: "Retirar",
+      href: "/dashboard/withdraw",
+      icon: withdraw,
+      current: false,
+    },
+    {
+      name: "Pagar Servicios",
+      href: "/dashboard/payService",
+      icon: payService,
+      current: false,
+    },
+    {
+      name: "Historial",
+      href: "/dashboard/history",
+      icon: history,
+      current: false,
+    },
+  ]);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const url = pathname + searchParams.toString();
+    const currentLink = links.find((link) => link.current);
+    if (!currentLink || currentLink.href !== url) {
+      const newLinks = links.map((link) => ({
+        ...link,
+        current: link.href === url,
+      }));
+      setLinks(newLinks);
+    }
+  }, [pathname, searchParams]);
+
   return (
     <div
       className={` ${
@@ -56,22 +79,6 @@ const Sidebar = () => {
             width={200}
             style={{ height: "auto" }}
           />
-          {/* <button onClick={() => setOpen(!open)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </button> */}
         </div>
         <div className="flex flex-col text-center text-pokegray font-bold">
           <span>Guillermo Cartagena</span>
@@ -84,17 +91,30 @@ const Sidebar = () => {
             {links.map(({ name, href, icon, current }) => (
               <li className="rounded-sm" key={href}>
                 <Link
+                  onClick={() => router.push(href)}
                   href={href}
-                  className="flex items-center p-5 space-x-3 rounded-3xl bg-pokeblue text-white hover:bg-pokeorange transition hover:transition"
+                  className={`${
+                    current ? "bg-pokeorange" : "bg-pokeblue"
+                  } flex items-center p-3 space-x-3 rounded-3xl bg-pokeblue text-white hover:bg-pokeorange transition hover:transition`}
                 >
-                  <span className="text-gray-100">{name}</span>
+                  <Image src={icon} alt={name} width={40} height={40} />
+                  <span className="text-gray-100 font-bold">{name}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="text-center">
-          <Link className="font-bold text-pokeorange text-xl" href="/">
+          <Link
+            className="font-bold text-pokeorange text-xl flex justify-center items-center"
+            href="/"
+          >
+            <Image
+              src="/resources/icons/close.svg"
+              alt="close"
+              width={40}
+              height={40}
+            />
             Cerrar Sesión
           </Link>
         </div>

@@ -4,7 +4,6 @@ import ButtonMain from "./components/ButtonMain";
 export default function Home() {
   return (
     <main className="max-w-full">
-      <Image className='w-100 z-[-1] fill' src="/resources/bg.png" alt="Pokémon Bank Logo" fill />
       <section className="flex flex-col items-center justify-center h-screen">
         <Image
           src="/resources/logo.svg"
