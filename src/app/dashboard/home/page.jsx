@@ -10,10 +10,10 @@ export const metadata = {
 
 const page = () => {
   return (
-    <main className="max-w-full">
+    <main>
       <Title text="Inicio" />
-      <section>
-        <p className="text-pokegray font-bold mt-10 max-w-xl text-justify">
+      <section className="">
+        <p className="text-pokegray font-bold mt-10 text-justify">
           ¡Bienvenido al banco en línea más seguro y conveniente! Con nuestro
           software de banca en línea, tendrás acceso las 24 horas del día, los 7
           días de la semana, a todas tus cuentas bancarias desde cualquier lugar
@@ -40,8 +40,8 @@ const page = () => {
             Tipo de transacciones realizadas
           </h2>
         </div>
-        <div className="max-w-[50%]">
-        <ChartHome/>
+        <div>
+          <ChartHome />
         </div>
       </section>
     </main>

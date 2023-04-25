@@ -18,6 +18,7 @@ module.exports = {
       'pokeblue': '#081226',
       'pokeorange': '#F36F21',
       'pokegray': '#8D8D8D',
+      'pokegray-light': '#F5F5F5',
       'white': '#FFFFFF',
     },
   },
