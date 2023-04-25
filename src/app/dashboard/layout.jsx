@@ -17,13 +17,12 @@ export const metadata = {
 export default function DashLayout({ children }) {
   return (
     <>
-    {/* lg:h-screen */}
-      <div className="flex-row lg:flex p-10 lg:p-20 lg:gap-10">
+      <div className="flex-row lg:flex p-10 lg:p-20 lg:gap-10 lg:h-screen">
         <div>
             <Sidebar />
         </div>
         <div className="container mx-auto bg-white rounded-3xl mr-10 mt-5 lg:mt-0">
-          <div className="p-10 mx-2">
+          <div className="p-10 mx-2 max-w-3xl">
             {children}
           </div>
         </div>

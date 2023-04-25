@@ -1,5 +1,6 @@
-import React from 'react'
+import React from "react";
 import Title from "@/app/components/Title";
+import TableHistory from "@/app/components/TableHistory";
 
 export const metadata = {
   title: "Dashboard - Historial",
@@ -9,10 +10,19 @@ export const metadata = {
 
 const page = () => {
   return (
-    <main className="max-w-full">
-      <Title text="Historial"/>
+    <main>
+      <Title text="Historial de movimientos" />
+      <section>
+        <p className="text-pokegray font-bold mt-10 text-justify">
+          ¡Mantente al tanto de tus finanzas con nuestro sistema de historial de
+          transacciones en línea! Con esta herramienta, puedes ver un registro
+          detallado de todos los movimientos de tu cuenta bancaria, desde
+          transferencias hasta pagos de facturas y retiros de efectivo.
+        </p>
+      </section>
+      <TableHistory/>
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default page;

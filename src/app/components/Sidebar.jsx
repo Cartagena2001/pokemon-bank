@@ -70,14 +70,15 @@ const Sidebar = () => {
         open ? "lg:w-40" : "lg:w-80 "
       } flex flex-col p-8 w-full bg-white shadow duration-300 rounded-3xl`}
     >
-      <div className="space-y-3">
+      <div className="space-y-1">
         <div className="flex items-center justify-center mb-5">
           <Image
+          className="w-auto"
             src="/resources/logo.svg"
             alt="Pokémon Bank Logo"
             height={200}
             width={200}
-            style={{ height: "auto" }}
+            // style={{ height: "auto" }}
           />
         </div>
         <div className="flex flex-col text-center text-pokegray font-bold">
