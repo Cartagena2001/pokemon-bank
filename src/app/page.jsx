@@ -6,7 +6,7 @@ export default function Home() {
     <main className="max-w-full">
       <section className="flex flex-col items-center justify-center h-screen">
         <Image
-          src="/resources/logo.svg"
+          src="/resources/Logo.svg"
           alt="Pokémon Bank Logo"
           height={300}
           width={300}
