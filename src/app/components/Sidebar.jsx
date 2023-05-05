@@ -74,7 +74,7 @@ const Sidebar = () => {
         <div className="flex items-center justify-center mb-5">
           <Image
           className="w-auto"
-            src="/resources/logo.svg"
+            src="/resources/Logo.svg"
             alt="Pokémon Bank Logo"
             height={200}
             width={200}
