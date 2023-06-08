@@ -6,11 +6,11 @@ import AmountsLower from "@/app/components/AmountsLower";
 // import deposit from "../../../../public/resources/icons/noun-receive-money-5673855.svg";
 import withdraw from "../../../../public/resources/icons/noun-send-money-5673861.svg";
 
-export const metadata = {
-  title: "Dashboard - Retirar",
-  description:
-    "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
-};
+// export const metadata = {
+//   title: "Dashboard - Retirar",
+//   description:
+//     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
+// };
 
 
 const page = () => {

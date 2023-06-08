@@ -3,11 +3,11 @@ import Title from "@/app/components/Title";
 import React from "react";
 import ChartHome from "@/app/components/ChartHome";
 
-export const metadata = {
-  title: "Dashboard - Home",
-  description:
-    "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
-};
+// export const metadata = {
+//   title: "Dashboard - Home",
+//   description:
+//     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
+// };
 
 const page = () => {
   const userName = JSON.parse(localStorage.getItem("user"));
