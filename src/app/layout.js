@@ -6,7 +6,7 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Pokémon Bank - Login",
+  title: "Pokémon Bank",
   description:
     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
   icons: {
