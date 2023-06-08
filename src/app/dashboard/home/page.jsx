@@ -1,3 +1,4 @@
+"use client";
 import Title from "@/app/components/Title";
 import React from "react";
 import ChartHome from "@/app/components/ChartHome";
@@ -9,6 +10,7 @@ export const metadata = {
 };
 
 const page = () => {
+  const userName = JSON.parse(localStorage.getItem("user"));
   return (
     <main>
       <Title text="Inicio" />
@@ -20,7 +22,7 @@ const page = () => {
           del mundo con conexión a Internet.
         </p>
         <h1 className="text-pokeorange font-bold text-2xl lg:text-5xl mt-10">
-          Saldo Disponible: $500
+          Saldo Disponible: ${userName.saldoInicial}
         </h1>
         <div className="flex flex-row items-center mt-5">
           <svg

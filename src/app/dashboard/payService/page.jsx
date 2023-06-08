@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Title from "@/app/components/Title";
 import ServicesButtons from "@/app/components/ServicesButtons";
