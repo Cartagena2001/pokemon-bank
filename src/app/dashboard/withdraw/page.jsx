@@ -1,17 +1,21 @@
+'use client'
 import React from "react";
 import Title from "@/app/components/Title";
-import Amounts from "@/app/components/Amounts";
+import AmountsLower from "@/app/components/AmountsLower";
 
 // import deposit from "../../../../public/resources/icons/noun-receive-money-5673855.svg";
 import withdraw from "../../../../public/resources/icons/noun-send-money-5673861.svg";
 
-export const metadata = {
-  title: "Dashboard - Retirar",
-  description:
-    "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
-};
+// export const metadata = {
+//   title: "Dashboard - Retirar",
+//   description:
+//     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
+// };
+
 
 const page = () => {
+  const userName = JSON.parse(localStorage.getItem("user"));
+
   return (
     <main>
       <Title text="Depositar" />
@@ -22,13 +26,13 @@ const page = () => {
           buscando. Es fácil, rápido y seguro.
         </p>
         <h1 className="text-pokeorange font-bold text-2xl lg:text-5xl mt-5">
-          Saldo Disponible: $500
+          Saldo Disponible: ${userName.saldoInicial}
         </h1>
         <h2 className="text-pokeblue font-bold text-md lg:text-2xl mt-5">
           Ingresa la cantidad de dinero a retirar
         </h2>
       </section>
-      <Amounts TextButton="Retirar" icon={withdraw} />
+      <AmountsLower TextButton="Retirar" icon={withdraw} />
     </main>
   );
 };

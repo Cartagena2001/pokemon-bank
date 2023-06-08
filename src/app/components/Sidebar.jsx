@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Toaster, toast } from "sonner";
+import Cookies from "js-cookie";
 
 import house from "../../../public/resources/icons/noun-house-5026194.svg";
 import deposit from "../../../public/resources/icons/noun-receive-money-5673855.svg";
@@ -64,63 +66,76 @@ const Sidebar = () => {
     }
   }, [pathname, searchParams]);
 
+  const userName = JSON.parse(localStorage.getItem("user"));
+
+  const handleLogout = () => {
+    localStorage.setItem("loggedin", false);
+    Cookies.remove("loggedin");
+    toast.success("Cerrando sesión...");
+    window.location.href = "/";
+  };
+
   return (
-    <div
-      className={` ${
-        open ? "lg:w-40" : "lg:w-80 "
-      } flex flex-col p-8 w-full bg-white shadow duration-300 rounded-3xl`}
-    >
-      <div className="space-y-1">
-        <div className="flex items-center justify-center mb-5">
-          <Image
-          className="w-auto"
-            src="/resources/Logo.svg"
-            alt="Pokémon Bank Logo"
-            height={200}
-            width={200}
-            // style={{ height: "auto" }}
-          />
-        </div>
-        <div className="flex flex-col text-center text-pokegray font-bold">
-          <span>Guillermo Cartagena</span>
-          <span>#3453454</span>
-          <span>Saldo Disponible: $500</span>
-          <span className="border-2 border-pokeorange mt-5"></span>
-        </div>
-        <div className="flex-1">
-          <ul className="pt-2 pb-4 space-y-5 text-xl">
-            {links.map(({ name, href, icon, current }) => (
-              <li className="rounded-sm" key={href}>
-                <Link
-                  onClick={() => router.push(href)}
-                  href={href}
-                  className={`${
-                    current ? "bg-pokeorange" : "bg-pokeblue"
-                  } flex items-center p-3 space-x-3 rounded-3xl bg-pokeblue text-white hover:bg-pokeorange transition hover:transition`}
-                >
-                  <Image src={icon} alt={name} width={40} height={40} />
-                  <span className="text-gray-100 font-bold">{name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="text-center">
-          <Link
-            className="font-bold text-pokeorange text-xl flex justify-center items-center"
-            href="/"
-          >
+    <>
+      <Toaster position="top-center" />
+      <div
+        className={` ${
+          open ? "lg:w-40" : "lg:w-80 "
+        } flex flex-col p-8 w-full bg-white shadow duration-300 rounded-3xl`}
+      >
+        <div className="space-y-1">
+          <div className="flex items-center justify-center mb-5">
             <Image
+              className="w-auto"
+              src="/resources/Logo.svg"
+              alt="Pokémon Bank Logo"
+              height={200}
+              width={200}
+              // style={{ height: "auto" }}
+            />
+          </div>
+          <div className="flex flex-col text-center text-pokegray font-bold">
+            <span>{userName.nombre}</span>
+            <span>#{userName.cuenta}</span>
+            <span>Saldo Disponible: ${userName.saldoInicial}</span>
+            <span className="border-2 border-pokeorange mt-5"></span>
+          </div>
+          <div className="flex-1">
+            <ul className="pt-2 pb-4 space-y-5 text-xl">
+              {links.map(({ name, href, icon, current }) => (
+                <li className="rounded-sm" key={href}>
+                  <Link
+                    onClick={() => router.push(href)}
+                    href={href}
+                    className={`${
+                      current ? "bg-pokeorange" : "bg-pokeblue"
+                    } flex items-center p-3 space-x-3 rounded-3xl bg-pokeblue text-white hover:bg-pokeorange transition hover:transition`}
+                  >
+                    <Image src={icon} alt={name} width={40} height={40} />
+                    <span className="text-gray-100 font-bold">{name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              onClick={handleLogout}
+              className="font-bold text-pokeorange text-xl flex justify-center items-center"
+              type="submit"
+            >
+              <Image
               src="/resources/icons/close.svg"
               alt="close"
               width={40}
               height={40}
             />
-            Cerrar Sesión
-          </Link>
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

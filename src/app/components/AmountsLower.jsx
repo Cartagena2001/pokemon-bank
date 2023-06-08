@@ -14,22 +14,25 @@ const Amounts = ({ TextButton, icon }) => {
     e.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem("user"));
     let amount = 0;
-
+  
     if (selectedAmount !== 0) {
-      amount = selectedAmount;
+      amount = -selectedAmount;
     } else if (input.amount !== "") {
       amount = parseInt(input.amount);
     } else {
       toast.error("Seleccione una cantidad o ingrese un monto");
       return;
     }
-
+  
     if (!isNaN(amount)) {
-      loggedUser.saldoInicial += amount;
-
-      // Registrar la transacción
+      if (amount > loggedUser.saldoInicial) {
+        toast.error("No tiene suficiente saldo en su cuenta");
+        return;
+      }
+  
+      loggedUser.saldoInicial -= amount;
       const transaction = {
-        tipo: "Depósito",
+        tipo: "Retiro",
         monto: amount,
         fecha: new Date().toISOString(),
       };
@@ -38,15 +41,16 @@ const Amounts = ({ TextButton, icon }) => {
       localStorage.setItem("user", JSON.stringify(loggedUser));
       setSelectedAmount(0);
       setInput({ amount: "" });
-      toast.success("¡Depósito realizado con éxito!");
-
+      toast.success("Retiro realizado con éxito!");
+  
       setTimeout(() => {
-        window.location.href = "/dashboard/home";
+        window.location.href = "/dashboard/withdraw";
       }, 500);
     } else {
       toast.error("La cantidad ingresada no es válida");
     }
   };
+  
 
   return (
     <>
@@ -57,9 +61,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 5 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -5 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(5)}
+                onClick={() => setSelectedAmount(-5)}
               >
                 $5
               </span>
@@ -67,9 +71,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 10 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -10 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(10)}
+                onClick={() => setSelectedAmount(-10)}
               >
                 $10
               </span>
@@ -79,9 +83,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 25 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -25 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(25)}
+                onClick={() => setSelectedAmount(-25)}
               >
                 $25
               </span>
@@ -89,9 +93,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 50 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -50 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(50)}
+                onClick={() => setSelectedAmount(-50)}
               >
                 $50
               </span>
@@ -101,9 +105,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 100 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -100 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(100)}
+                onClick={() => setSelectedAmount(-100)}
               >
                 $100
               </span>
@@ -111,9 +115,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 150 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -150 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(150)}
+                onClick={() => setSelectedAmount(-150)}
               >
                 $150
               </span>
@@ -123,9 +127,9 @@ const Amounts = ({ TextButton, icon }) => {
             <div>
               <span
                 className={`text-pokeblue font-bold hover:bg-pokeorange hover:text-white transition hover:transition cursor-pointer rounded p-2 ${
-                  selectedAmount === 200 ? "bg-pokeorange text-white" : ""
+                  selectedAmount === -200 ? "bg-pokeorange text-white" : ""
                 }`}
-                onClick={() => setSelectedAmount(200)}
+                onClick={() => setSelectedAmount(-200)}
               >
                 $200
               </span>

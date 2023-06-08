@@ -3,16 +3,16 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Sidebar from "../components/Sidebar";
 
-export const metadata = {
-  title: "Dashboard",
-  description:
-    "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
-  icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
-  },
-};
+// export const metadata = {
+//   title: "Dashboard",
+//   description:
+//     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
+//   icons: {
+//     icon: "/icon.png",
+//     shortcut: "/icon.png",
+//     apple: "/icon.png",
+//   },
+// };
 
 export default function DashLayout({ children }) {
   return (

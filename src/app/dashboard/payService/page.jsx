@@ -1,13 +1,14 @@
+'use client'
 import React from "react";
 import Title from "@/app/components/Title";
 import ServicesButtons from "@/app/components/ServicesButtons";
 import PayInputServices from "@/app/components/PayInputServices";
 
-export const metadata = {
-  title: "Dashboard - Pago de servicios",
-  description:
-    "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
-};
+// export const metadata = {
+//   title: "Dashboard - Pago de servicios",
+//   description:
+//     "Pokémon Bank is a paid service that allows you to store and manage your Pokémon in private boxes on the internet.",
+// };
 
 const page = () => {
   return (
