@@ -22,7 +22,7 @@ const page = () => {
           hogar o lugar de trabajo.
         </p>
         <ServicesButtons/>
-        <PayInputServices/>
+        {/* <PayInputServices/> */}
       </section>
     </main>
   );
