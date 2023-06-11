@@ -33,7 +33,7 @@ const Amounts = ({ TextButton, icon }) => {
       loggedUser.saldoInicial -= amount;
       const transaction = {
         tipo: "Retiro",
-        monto: amount,
+        monto: -amount,
         fecha: new Date().toISOString(),
       };
       loggedUser.transacciones.push(transaction);
@@ -44,7 +44,7 @@ const Amounts = ({ TextButton, icon }) => {
       toast.success("Retiro realizado con éxito!");
   
       setTimeout(() => {
-        window.location.href = "/dashboard/withdraw";
+        window.location.href = "/dashboard/home";
       }, 500);
     } else {
       toast.error("La cantidad ingresada no es válida");
