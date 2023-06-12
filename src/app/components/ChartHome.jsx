@@ -62,7 +62,7 @@ const PieExample = () => {
   };
 
   return (
-    <div style={{ width: '400px', height: '400px' }}>
+    <div style={{ width: '500px', height: '350px' }}>
       <Pie
         data={data}
         options={{

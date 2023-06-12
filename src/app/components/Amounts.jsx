@@ -2,13 +2,18 @@
 import React, { useState } from "react";
 import DealButton from "./DealButton";
 import { Toaster, toast } from "sonner";
+import PDFButton from "./PDFButton";
+
+// const myService = { name: "Deposito", amount: amount };
 
 const Amounts = ({ TextButton, icon }) => {
   const [input, setInput] = useState({
     amount: "",
   });
 
+  const [depositAmount, setDepositAmount] = useState(0);
   const [selectedAmount, setSelectedAmount] = useState(0);
+  const [paid, setPaid] = useState(false);
 
   const handleAmount = (e) => {
     e.preventDefault();
@@ -30,7 +35,7 @@ const Amounts = ({ TextButton, icon }) => {
       // Registrar la transacción
       const transaction = {
         tipo: "Depósito",
-        monto: amount,
+        monto: Number(amount.toFixed(2)),
         fecha: new Date().toISOString(),
       };
       loggedUser.transacciones.push(transaction);
@@ -40,13 +45,15 @@ const Amounts = ({ TextButton, icon }) => {
       setInput({ amount: "" });
       toast.success("¡Depósito realizado con éxito!");
 
-      setTimeout(() => {
-        window.location.href = "/dashboard/home";
-      }, 500);
+      setPaid(true);
+      setDepositAmount(amount);
     } else {
       toast.error("La cantidad ingresada no es válida");
     }
   };
+
+  const amount = selectedAmount || input.amount;
+  console.log(amount);
 
   return (
     <>
@@ -153,6 +160,12 @@ const Amounts = ({ TextButton, icon }) => {
             <DealButton text={TextButton} icon={icon} />
           </div>
         </form>
+        {paid && (
+          <PDFButton
+            user={JSON.parse(localStorage.getItem("user"))}
+            service={{ name: "Deposito", amount: depositAmount }}
+          />
+        )}
       </section>
     </>
   );

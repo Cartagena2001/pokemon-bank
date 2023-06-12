@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
-// import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import PDFButton from "./PDFButton";
 
 import ligth from "../../../public/resources/icons/noun-lightbulb-2906104.svg";
 import phone from "../../../public/resources/icons/noun-phone-5674174.svg";
@@ -14,27 +14,28 @@ const services = [
   {
     name: "Electricidad",
     icon: ligth,
-    amount: 90.4,
+    amount: 90,
   },
   {
     name: "Agua",
     icon: water,
-    amount: 5.3,
+    amount: 5,
   },
   {
     name: "Internet",
     icon: www,
-    amount: 45.6,
+    amount: 45,
   },
   {
     name: "Telefonía",
     icon: phone,
-    amount: 12.4,
+    amount: 15,
   },
 ];
 
 const ServicesButtons = () => {
   const [activeService, setActiveService] = useState(null);
+  const [paid, setPaid] = useState(false);
 
   const handleButtonClick = (serviceName) => {
     setActiveService(serviceName);
@@ -55,7 +56,7 @@ const ServicesButtons = () => {
         // Crea un objeto transacción con el tipo, el monto y la fecha
         const transaction = {
           tipo: `Pago de ${activeService}`,
-          monto: -activeAmount,
+          monto: -Number(activeAmount.toFixed(2)),
           fecha: new Date().toISOString(),
         };
         // Agrega el objeto transacción al array de transacciones del usuario
@@ -64,9 +65,7 @@ const ServicesButtons = () => {
         localStorage.setItem("user", JSON.stringify(loggedUser));
 
         toast.success("¡Pago realizado con éxito!");
-        setTimeout(() => {
-          window.location.href = "/dashboard/home";
-        }, 500);
+        setPaid(true);
       } else {
         toast.error("No tienes saldo suficiente para pagar este servicio");
       }
@@ -103,6 +102,12 @@ const ServicesButtons = () => {
         >
           Pagar Servicio
         </button>
+        {paid && (
+          <PDFButton
+            user={JSON.parse(localStorage.getItem("user"))}
+            service={services.find((service) => service.name === activeService)}
+          />
+        )}
       </div>
     </>
   );

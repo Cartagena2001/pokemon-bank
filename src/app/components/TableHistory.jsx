@@ -4,7 +4,7 @@ import React from "react";
 const TableHistory = () => {
   const loggedUser = JSON.parse(localStorage.getItem("user"));
   return (
-    <div className="mt-10">
+    <div className="mt-10 overflow-auto max-h-[30rem]">
       <table className="min-w-full text-left table-auto">
         <thead>
           <tr>
