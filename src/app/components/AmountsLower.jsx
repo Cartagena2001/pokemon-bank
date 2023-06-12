@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import DealButton from "./DealButton";
 import { Toaster, toast } from "sonner";
+import PDFButton from "./PDFButton";
 
 const Amounts = ({ TextButton, icon }) => {
   const [input, setInput] = useState({
@@ -9,12 +10,14 @@ const Amounts = ({ TextButton, icon }) => {
   });
 
   const [selectedAmount, setSelectedAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState(0);
+  const [paid, setPaid] = useState(false);
 
   const handleAmount = (e) => {
     e.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem("user"));
     let amount = 0;
-  
+
     if (selectedAmount !== 0) {
       amount = -selectedAmount;
     } else if (input.amount !== "") {
@@ -23,17 +26,17 @@ const Amounts = ({ TextButton, icon }) => {
       toast.error("Seleccione una cantidad o ingrese un monto");
       return;
     }
-  
+
     if (!isNaN(amount)) {
       if (amount > loggedUser.saldoInicial) {
         toast.error("No tiene suficiente saldo en su cuenta");
         return;
       }
-  
+
       loggedUser.saldoInicial -= amount;
       const transaction = {
         tipo: "Retiro",
-        monto: -amount,
+        monto: -Number(amount.toFixed(2)),
         fecha: new Date().toISOString(),
       };
       loggedUser.transacciones.push(transaction);
@@ -42,15 +45,13 @@ const Amounts = ({ TextButton, icon }) => {
       setSelectedAmount(0);
       setInput({ amount: "" });
       toast.success("Retiro realizado con éxito!");
-  
-      setTimeout(() => {
-        window.location.href = "/dashboard/home";
-      }, 500);
+
+      setPaid(true);
+      setDepositAmount(amount);
     } else {
       toast.error("La cantidad ingresada no es válida");
     }
   };
-  
 
   return (
     <>
@@ -157,6 +158,12 @@ const Amounts = ({ TextButton, icon }) => {
             <DealButton text={TextButton} icon={icon} />
           </div>
         </form>
+        {paid && (
+          <PDFButton
+            user={JSON.parse(localStorage.getItem("user"))}
+            service={{ name: "Retiro", amount: depositAmount }}
+          />
+        )}
       </section>
     </>
   );

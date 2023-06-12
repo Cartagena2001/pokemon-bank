@@ -1,11 +1,10 @@
 "use client";
 import Image from "next/image";
-import ButtonMain from "./components/ButtonMain";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "sonner";
 import Cookies from "js-cookie";
 
-export default function Home() {
+const Home = () =>{
   function setUser() {
     if (!localStorage.getItem("user")) {
       localStorage.setItem(
@@ -86,8 +85,11 @@ export default function Home() {
             </button>
             </div>
           </form>
+          <h1 className="text-white">Demo-PIN: 1234</h1>
         </section>
       </main>
     </>
   );
 }
+
+export default Home;
